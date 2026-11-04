@@ -15,7 +15,6 @@ course-website/
     ├── js/main.js      ← animaties & interacties
     ├── css/style.css
     ├── img/            ← previews van de PDF-pagina's
-    └── vendor/         ← GSAP + ScrollTrigger (lokaal, geen CDN nodig)
 ```
 
 ## Live zetten in 4 stappen
@@ -60,14 +59,13 @@ python3 -m http.server 8000
 # open http://localhost:8000
 ```
 
-## Ontwerp & wat zit erin
-Art direction: **"lab report × performance"**: bijna zwart, warm gebroken wit, één goud accent; de vier hormoonkleuren alleen als datakleur. Archivo (condensed) voor koppen, IBM Plex Mono voor labels, Instrument Serif als zeldzaam accent. Elke sectie verwijst naar het hoofdstuk waar de inhoud vandaan komt.
+## Ontwerp
+Simpele verkooppagina: de bezoeker moet in een paar seconden zien wat het is, wat het kost en waar hij kan kopen.
 
-- Hero: testosteron-molecuul dat zichzelf tekent + hexagon-raster (ringstructuur van hormonen) waar een "groeipuls" doorheen loopt
-- Ticker met echte onderwerpen uit de cursus (1.1, 2.3, 4.2 …)
-- Interactief hormoonsysteem (toegankelijke tabs, pijltjestoetsen) i.p.v. losse kaarten
-- 24-uurs klok die meedraait met scrollen (desktop), automatische animatie op mobiel
-- Hormoon-quiz (Ch. 5.5) met focusbeheer voor toetsenbordgebruikers
-- Curriculum-accordeon + PDF-pagina's die uitwaaieren, prijskaart, bronnen, FAQ
-- Geen laadscherm, geen oneindige decoratieve animaties; respecteert *reduced motion*
-- Getest: geen horizontale overflow (390px en 1440px), toetsenbord-navigatie, mobiel menu (focus + inert), geen console-fouten
+1. Kop + één zin + koopknop + de echte cover van de cursus
+2. Wat je leert: 5 korte regels (kleuren van de cover)
+3. Pagina's uit de PDF + wat je krijgt + prijs + koopknop
+4. 4 korte vragen
+5. Laatste koopknop, plus een koopbalk die meeloopt tijdens het scrollen
+
+Beweging: tekst schuift rustig in beeld, de cover kantelt mee met de muis, de pagina's waaieren uit. Geen externe JavaScript-bibliotheken. Respecteert *reduced motion*.

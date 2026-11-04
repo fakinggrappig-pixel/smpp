@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Privacy Policy | Hormonal Optimization</title>
+  <meta name="theme-color" content="#07080b" />
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <header class="nav scrolled">
+    <div class="container">
+      <a href="index.html" class="brand">
+        <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3l14.7 8.5v17L20 37 5.3 28.5v-17z"/><path d="M20 11l7.8 4.5v9L20 29l-7.8-4.5v-9z"/></svg>
+        <span class="brand-text">Hormonal Optimization<small>The complete course</small></span>
+      </a>
+      <a href="index.html#pricing" class="btn btn-gold btn-sm">Get the course</a>
+    </div>
+  </header>
+  <main class="page-simple">
+    <div class="container legal">
+      <span class="eyebrow">Legal</span>
+      <h1>Privacy Policy</h1>
+      <div class="updated">Last updated: November 4, 2026</div>
+      <div class="note"><b>Template.</b> Fill in the highlighted fields and have this text checked before you start selling. EU law requires you to show who the seller is (name and address) even if the brand itself is anonymous.</div>
+
+      <h2>1. Controller</h2>
+      <p>The controller for personal data processed via this website is <span class="placeholder">[Your full name or company name]</span>, <span class="placeholder">[Street + number, postcode, city, country]</span>, <span class="placeholder">[Chamber of Commerce / VAT number, if applicable]</span>. Contact: <a href="#" data-email>support@example.com</a>.</p>
+      <h2>2. What we collect</h2>
+      <p><b>When you buy the Course:</b> payment is handled by Stripe. Stripe processes your name, e-mail address, billing details and payment information to complete the transaction and send your receipt. We receive your name, e-mail address, country and the order details from Stripe. We do not receive your full card details.</p>
+      <p><b>When you contact us:</b> we process your e-mail address and the content of your message to answer you.</p>
+      <p><b>When you visit the website:</b> our hosting provider (<span class="placeholder">[e.g. Netlify / Vercel / GitHub Pages]</span>) may process technical data such as your IP address in server logs for security. Fonts are loaded from Google Fonts, which means your IP address is sent to Google. This website does not use advertising or analytics cookies.</p>
+      <h2>3. Why and on what legal basis</h2>
+      <ul>
+        <li>To perform the purchase contract and deliver the Course (Art. 6(1)(b) GDPR).</li>
+        <li>To meet our legal bookkeeping and tax obligations (Art. 6(1)(c) GDPR).</li>
+        <li>To keep the website secure and answer your questions (Art. 6(1)(f) GDPR, legitimate interest).</li>
+      </ul>
+      <h2>4. Who we share data with</h2>
+      <p>Stripe Payments Europe, Ltd. (payment processing, see <a href="https://stripe.com/privacy" rel="noopener">stripe.com/privacy</a>), our hosting provider and our e-mail provider. Some of these providers may process data outside the EEA under appropriate safeguards such as the EU Standard Contractual Clauses. We never sell your data.</p>
+      <h2>5. How long we keep it</h2>
+      <p>Order and invoice data are kept for as long as tax law requires (<span class="placeholder">[e.g. 7 years]</span>). Support e-mails are deleted when they are no longer needed.</p>
+      <h2>6. Your rights</h2>
+      <p>You have the right to access, correct, delete, restrict or port your personal data, and to object to processing. Email us to exercise these rights. You also have the right to lodge a complaint with your data protection authority (<span class="placeholder">[e.g. Autoriteit Persoonsgegevens / GBA]</span>).</p>
+
+    </div>
+  </main>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <a href="index.html" class="brand"><svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3l14.7 8.5v17L20 37 5.3 28.5v-17z"/><path d="M20 11l7.8 4.5v9L20 29l-7.8-4.5v-9z"/></svg><span class="brand-text">Hormonal Optimization<small>The complete course</small></span></a>
+        <nav class="footer-links" aria-label="Legal"><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a><a href="refund.html">Refund policy</a><a href="#" data-email>Contact</a></nav>
+      </div>
+      <div class="footer-bottom"><span>© 2026 Hormonal Optimization. All rights reserved.</span><span>Payments securely processed by Stripe.</span></div>
+    </div>
+  </footer>
+  <script src="assets/js/config.js"></script>
+  <script>
+    (function () {
+      var e = (window.SITE_CONFIG || {}).contactEmail;
+      if (!e) return;
+      document.querySelectorAll("[data-email]").forEach(function (a) { a.href = "mailto:" + e; if (a.textContent.indexOf("@") > -1) a.textContent = e; });
+    })();
+  </script>
+</body>
+</html>

@@ -18,14 +18,24 @@
   if (year) year.textContent = new Date().getFullYear();
 
   /* Test mode: the page looks normal (real price), but buy buttons skip
-     Stripe and go straight to the download page. */
+     the checkout and go straight to the download page. */
   if (free) $$("[data-buy]").forEach((el) => (el.href = "thank-you.html"));
 
-  const linkReady = !free && /^https:\/\//.test(cfg.stripePaymentLink || "") && !/REPLACE/i.test(cfg.stripePaymentLink);
+  /* Free sleep chapter: Lemon Squeezy €0 product (collects e-mail), or the PDF itself */
+  const ready = (u) => /^https:\/\//.test(u || "") && !/REPLACE/i.test(u);
+  $$("[data-free]").forEach((el) => {
+    if (ready(cfg.freeChapterUrl)) { el.href = cfg.freeChapterUrl; el.rel = "noopener"; }
+    else el.href = cfg.freeChapterFile || "downloads/free-sleep-chapter.pdf";
+  });
+  const freeNote = $(".free-note");
+  if (freeNote && !ready(cfg.freeChapterUrl)) freeNote.textContent = "Free PDF, no sign-up needed.";
+
+  const checkout = cfg.checkoutUrl || cfg.stripePaymentLink;
+  const linkReady = !free && ready(checkout);
   const toast = $("#toast");
   let toastTimer;
   if (!free) $$("[data-buy]").forEach((el) => {
-    if (linkReady) { el.href = cfg.stripePaymentLink; el.rel = "noopener"; return; }
+    if (linkReady) { el.href = checkout; el.rel = "noopener"; return; }
     // Not configured yet: go to the buy block, and tell the site owner what to do.
     el.addEventListener("click", (e) => {
       e.preventDefault();
@@ -33,7 +43,7 @@
       const r = buy.getBoundingClientRect();
       if (r.top > window.innerHeight * 0.5 || r.bottom < 0) buy.scrollIntoView({ behavior: reduced ? "auto" : "smooth" });
       else {
-        toast.innerHTML = "Checkout isn't live yet. Add your Stripe Payment Link to <code>assets/js/config.js</code>.";
+        toast.innerHTML = "Checkout isn't live yet. Add your checkout link (checkoutUrl) to <code>assets/js/config.js</code>.";
         toast.classList.add("show");
         clearTimeout(toastTimer);
         toastTimer = setTimeout(() => toast.classList.remove("show"), 5000);

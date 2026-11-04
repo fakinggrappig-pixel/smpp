@@ -248,3 +248,12 @@ p { text-wrap: pretty; }
 @media (max-width: 860px) { .watch .container { grid-template-columns: 1fr; } }
 .thanks .player { max-width: 860px; margin: 48px auto 0; text-align: left; }
 .video-note a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+
+/* ----------------------------------------------------------- free chapter */
+.free { padding-block: 0 clamp(80px, 11vw, 140px); }
+.free .container { display: grid; grid-template-columns: minmax(0, 0.55fr) minmax(0, 1.45fr); gap: clamp(28px, 5vw, 64px); align-items: center;
+  border-top: 1px solid var(--line); padding-top: clamp(48px, 7vw, 80px); }
+.free-cover { width: 100%; max-width: 260px; border-radius: 4px; transform: rotate(-3deg); box-shadow: 0 30px 60px -24px rgba(23, 23, 27, 0.55), 0 0 0 1px rgba(23, 23, 27, 0.06); }
+.free .btn { margin-top: 28px; }
+.free-note { font-size: 14px; color: var(--muted); margin: 12px 0 0; }
+@media (max-width: 700px) { .free .container { grid-template-columns: 1fr; } .free-cover { max-width: 190px; } .free .btn { width: 100%; } }

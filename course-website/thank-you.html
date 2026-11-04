@@ -28,7 +28,8 @@
       <div class="thanks-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
       <span class="eyebrow" id="status">Payment successful</span>
       <h1>You're in.</h1>
-      <p class="lead">Thanks for your order. Download your course and save it somewhere safe.</p>
+      <p class="lead" id="msgSite">Thanks for your order. Download your course and save it somewhere safe.</p>
+      <p class="lead" id="msgPlatform" hidden>Thanks for your order. Your download link is in the email from Lemon Squeezy (check your spam folder too). Save the PDF somewhere safe.</p>
       <a href="#" id="downloadBtn" class="btn btn-primary btn-lg" target="_blank" rel="noopener">
         Download the course (PDF)
         <svg class="btn-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -53,7 +54,12 @@
       var cfg = window.SITE_CONFIG || {};
       var btn = document.getElementById("downloadBtn");
       if (cfg.testMode === true) document.getElementById("status").textContent = "Test order: no payment taken";
-      if (cfg.downloadUrl && !/REPLACE/i.test(cfg.downloadUrl)) {
+      // Real orders with platform delivery: the PDF comes by e-mail, so no public download link here.
+      if (cfg.testMode !== true && cfg.delivery === "platform") {
+        btn.hidden = true;
+        document.getElementById("msgSite").hidden = true;
+        document.getElementById("msgPlatform").hidden = false;
+      } else if (cfg.downloadUrl && !/REPLACE/i.test(cfg.downloadUrl)) {
         btn.href = cfg.downloadUrl;
       } else {
         btn.addEventListener("click", function (e) {

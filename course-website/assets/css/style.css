@@ -33,6 +33,7 @@
   --max: 1240px;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --nav-h: 72px;
+  color-scheme: dark;
 }
 
 *,
@@ -123,8 +124,9 @@ button { font: inherit; color: inherit; cursor: pointer; }
 /* Loader ------------------------------------------------------------------ */
 .loader {
   position: fixed; inset: 0; z-index: 200; background: var(--bg);
-  display: grid; place-items: center;
+  display: none; place-items: center;
 }
+.js .loader { display: grid; }
 .loader-inner { display: flex; flex-direction: column; align-items: center; gap: 22px; }
 .loader-mark { width: 74px; height: 74px; }
 .loader-mark path { fill: none; stroke: var(--gold); stroke-width: 2; stroke-dasharray: 260; stroke-dashoffset: 260; animation: drawMark 1.3s var(--ease) forwards; }

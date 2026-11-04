@@ -60,12 +60,14 @@ python3 -m http.server 8000
 # open http://localhost:8000
 ```
 
-## Wat zit erin
-- Laadscherm, geanimeerde hero met testosteron-molecuul dat zichzelf tekent, deeltjesnetwerk dat op de muis reageert
-- Marquee die versnelt met je scrollsnelheid, manifest-tekst die woord voor woord oplicht
-- 4 hormoon-kaarten met 3D-tilt + spotlight, geanimeerde "system chain"
-- **24-uurs klok** die meedraait terwijl je scrollt (vastgepind op desktop, automatische animatie op mobiel)
-- Hormoon-quiz (4 vragen → resultaat → koopknop)
-- Curriculum-accordeon + PDF-pagina's die uitwaaieren
-- Prijskaart met draaiende gouden rand, sticky koopbalk, FAQ, 22 bronnen
-- Respecteert *reduced motion* en werkt ook zonder JavaScript-animaties
+## Ontwerp & wat zit erin
+Art direction: **"lab report × performance"**: bijna zwart, warm gebroken wit, één goud accent; de vier hormoonkleuren alleen als datakleur. Archivo (condensed) voor koppen, IBM Plex Mono voor labels, Instrument Serif als zeldzaam accent. Elke sectie verwijst naar het hoofdstuk waar de inhoud vandaan komt.
+
+- Hero: testosteron-molecuul dat zichzelf tekent + hexagon-raster (ringstructuur van hormonen) waar een "groeipuls" doorheen loopt
+- Ticker met echte onderwerpen uit de cursus (1.1, 2.3, 4.2 …)
+- Interactief hormoonsysteem (toegankelijke tabs, pijltjestoetsen) i.p.v. losse kaarten
+- 24-uurs klok die meedraait met scrollen (desktop), automatische animatie op mobiel
+- Hormoon-quiz (Ch. 5.5) met focusbeheer voor toetsenbordgebruikers
+- Curriculum-accordeon + PDF-pagina's die uitwaaieren, prijskaart, bronnen, FAQ
+- Geen laadscherm, geen oneindige decoratieve animaties; respecteert *reduced motion*
+- Getest: geen horizontale overflow (390px en 1440px), toetsenbord-navigatie, mobiel menu (focus + inert), geen console-fouten

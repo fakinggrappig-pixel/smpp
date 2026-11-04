@@ -247,3 +247,4 @@ p { text-wrap: pretty; }
 .video-note { font-size: 14px; color: var(--muted); margin-top: 10px; }
 @media (max-width: 860px) { .watch .container { grid-template-columns: 1fr; } }
 .thanks .player { max-width: 860px; margin: 48px auto 0; text-align: left; }
+.video-note a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }

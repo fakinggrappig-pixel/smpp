@@ -46,7 +46,7 @@
             <a href="#buy" class="btn btn-primary btn-lg" data-buy>Buy now · <span data-price>€8.99</span> <svg class="btn-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
             <ul class="ticks">
               <li><svg aria-hidden="true"><use href="#i-check"/></svg>Instant download</li>
-              <li><svg aria-hidden="true"><use href="#i-check"/></svg>One-time payment</li>
+              <li data-paid-only><svg aria-hidden="true"><use href="#i-check"/></svg>One-time payment</li>
             </ul>
           </div>
         </div>
@@ -92,9 +92,9 @@
             <li class="rise" style="--d:.15s"><svg aria-hidden="true"><use href="#i-check"/></svg>Weekly training and food plan</li>
             <li class="rise" style="--d:.2s"><svg aria-hidden="true"><use href="#i-check"/></svg>Based on 22 scientific studies</li>
           </ul>
-          <div class="price rise"><b data-price>€8.99</b><span>one-time payment</span></div>
+          <div class="price rise"><b data-price>€8.99</b><span data-price-note>one-time payment</span></div>
           <a href="#buy" class="btn btn-primary btn-lg btn-block" data-buy>Buy now and download <svg class="btn-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-          <p class="secure"><svg aria-hidden="true"><use href="#i-lock"/></svg>Secure payment with Stripe</p>
+          <p class="secure" data-paid-only><svg aria-hidden="true"><use href="#i-lock"/></svg>Secure payment with Stripe</p>
         </div>
       </div>
     </section>

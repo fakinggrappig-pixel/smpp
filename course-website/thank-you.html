@@ -26,13 +26,14 @@
     <canvas id="burst" aria-hidden="true"></canvas>
     <div class="container">
       <div class="thanks-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
-      <span class="eyebrow">Payment successful</span>
+      <span class="eyebrow" id="status">Payment successful</span>
       <h1>You're in.</h1>
       <p class="lead">Thanks for your order. Download your course and save it somewhere safe.</p>
       <a href="#" id="downloadBtn" class="btn btn-primary btn-lg" download>
         Download the course (PDF)
         <svg class="btn-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
+      <p id="dlNote" class="lead" style="font-size:15px;color:var(--gold-2);margin-top:18px" hidden>The download link isn't set yet. Add the PDF path to downloadUrl in assets/js/config.js.</p>
       <p class="lead" style="font-size:15px;color:var(--muted);margin-top:18px">Problem with the download? Email <a href="#" data-email style="color:var(--gold-2)">support@example.com</a>.</p>
 
       <div class="next-steps">
@@ -48,12 +49,16 @@
     (function () {
       var cfg = window.SITE_CONFIG || {};
       var btn = document.getElementById("downloadBtn");
+      if (cfg.freeMode === true) {
+        document.getElementById("status").textContent = "Your free copy";
+        document.querySelector(".thanks .lead").textContent = "Download your course and save it somewhere safe.";
+      }
       if (cfg.downloadUrl && !/REPLACE/i.test(cfg.downloadUrl)) {
         btn.href = cfg.downloadUrl;
       } else {
         btn.addEventListener("click", function (e) {
           e.preventDefault();
-          alert("Download link not configured yet: set downloadUrl in assets/js/config.js");
+          document.getElementById("dlNote").hidden = false;
         });
       }
       if (cfg.contactEmail) {

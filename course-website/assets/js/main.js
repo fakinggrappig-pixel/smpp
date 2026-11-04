@@ -10,27 +10,16 @@
   const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
   /* Config: price, e-mail, Stripe link */
-  const free = cfg.freeMode === true;
-  const price = free ? "Free" : cfg.price || "€8.99";
+  const free = cfg.testMode === true;
+  const price = cfg.price || "€8.99";
   $$("[data-price]").forEach((el) => (el.textContent = price));
   if (cfg.contactEmail) $$("[data-email]").forEach((a) => (a.href = "mailto:" + cfg.contactEmail));
   const year = $("#year");
   if (year) year.textContent = new Date().getFullYear();
 
-  /* Free mode: no checkout, every buy button goes straight to the download page */
-  if (free) {
-    const words = [["Buy now and download", "Download for free"], ["Buy now", "Get it now"], ["Buy", "Get it"]];
-    $$("[data-buy]").forEach((el) => {
-      el.href = "thank-you.html";
-      el.childNodes.forEach((n) => {
-        if (n.nodeType !== 3) return;
-        const hit = words.find(([from]) => n.textContent.includes(from));
-        if (hit) n.textContent = n.textContent.replace(hit[0], hit[1]);
-      });
-    });
-    $$("[data-paid-only]").forEach((el) => (el.hidden = true));
-    $$("[data-price-note]").forEach((el) => (el.textContent = "no payment needed"));
-  }
+  /* Test mode: the page looks normal (real price), but buy buttons skip
+     Stripe and go straight to the download page. */
+  if (free) $$("[data-buy]").forEach((el) => (el.href = "thank-you.html"));
 
   const linkReady = !free && /^https:\/\//.test(cfg.stripePaymentLink || "") && !/REPLACE/i.test(cfg.stripePaymentLink);
   const toast = $("#toast");

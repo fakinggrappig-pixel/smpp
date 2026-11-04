@@ -16,10 +16,10 @@ window.SITE_CONFIG = {
   // 4. Where the PDF lives (used on thank-you.html).
   //    Upload the PDF to your host and use a hard-to-guess file name, e.g.
   //    "downloads/hormonal-optimization-7f3k9q2x.pdf"
-  downloadUrl: "downloads/REPLACE-with-secret-name.pdf",
+  downloadUrl: "downloads/hormonal-optimization-course.pdf",
 
-  // 5. Free mode. true = every buy button skips payment and goes straight
-  //    to the download page, and the site shows "Free" instead of the price.
-  //    Set to false when you want to sell with Stripe again.
-  freeMode: true,
+  // 5. Test mode. true = the site shows the normal price, but every buy
+  //    button skips payment and goes straight to the download page.
+  //    Set to false before you start selling for real.
+  testMode: true,
 };

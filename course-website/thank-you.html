@@ -29,7 +29,7 @@
       <span class="eyebrow" id="status">Payment successful</span>
       <h1>You're in.</h1>
       <p class="lead">Thanks for your order. Download your course and save it somewhere safe.</p>
-      <a href="#" id="downloadBtn" class="btn btn-primary btn-lg" download>
+      <a href="#" id="downloadBtn" class="btn btn-primary btn-lg" target="_blank" rel="noopener">
         Download the course (PDF)
         <svg class="btn-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
@@ -49,10 +49,7 @@
     (function () {
       var cfg = window.SITE_CONFIG || {};
       var btn = document.getElementById("downloadBtn");
-      if (cfg.freeMode === true) {
-        document.getElementById("status").textContent = "Your free copy";
-        document.querySelector(".thanks .lead").textContent = "Download your course and save it somewhere safe.";
-      }
+      if (cfg.testMode === true) document.getElementById("status").textContent = "Test order: no payment taken";
       if (cfg.downloadUrl && !/REPLACE/i.test(cfg.downloadUrl)) {
         btn.href = cfg.downloadUrl;
       } else {

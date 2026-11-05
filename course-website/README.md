@@ -1,7 +1,7 @@
 # Hormonal Optimization: cursus-website
 
 Statische verkoopwebsite (HTML/CSS/JS, geen build nodig) voor de cursus **Hormonal Optimization**, prijs **€8.99**.
-Betalen, btw en levering van de PDF lopen via **Lemon Squeezy** (Merchant of Record).
+Betalen loopt via een **Stripe Payment Link**. Na betaling stuurt Stripe de koper naar de downloadpagina.
 
 ```
 course-website/
@@ -11,7 +11,7 @@ course-website/
 ├── terms.html          ← algemene voorwaarden (template)
 ├── privacy.html        ← privacybeleid (template)
 ├── refund.html         ← refund policy (template)
-├── downloads/          ← alleen voor testen / gratis hoofdstuk (PDF's staan NIET in git)
+├── downloads/          ← gratis hoofdstuk + betaalde PDF (staan NIET in git)
 └── assets/
     ├── js/config.js    ← ★ het enige bestand dat je moet aanpassen
     ├── js/main.js
@@ -20,50 +20,28 @@ course-website/
     └── video/          ← overzichtsvideo + poster
 ```
 
-## Lemon Squeezy instellen (±15 minuten, samen met een ouder)
+## Stripe
 
-Je moet **18+** zijn voor een betaalaccount. Laat daarom een ouder/voogd het account aanmaken: het geld komt op hun rekening.
+Je moet **18+** zijn voor een betaalaccount. Het Stripe-account moet dus op naam van een ouder/voogd staan, met hun bankrekening en ID-controle.
 
-### 1. Account en winkel
-1. Ga naar [lemonsqueezy.com](https://www.lemonsqueezy.com) → **Get started**. Account op naam van je ouder.
-2. Maak een **Store** aan, bijvoorbeeld `Hormonal Optimization`.
-3. Vul **Settings → Payouts** in (bankrekening van je ouder) en doe de identiteitscontrole. Pas daarna kun je echt verkopen.
+Hoe het werkt:
+1. De koopknoppen gaan naar de Stripe Payment Link (`checkoutUrl` in `assets/js/config.js`).
+2. Na betaling stuurt Stripe de koper naar `thank-you.html?k=<sleutel>`.
+3. De downloadpagina biedt dan `downloads/hormonal-optimization-<sleutel>.pdf` aan.
 
-### 2. Product: de cursus (€8.99)
-1. **Products → New product**.
-2. Naam: `Hormonal Optimization: The Complete Course`. Prijs: **€8.99**, *single payment*.
-3. Bij **Files**: upload `Hormonal_Optimization_Course.pdf`. Lemon Squeezy mailt kopers dan zelf een veilige downloadlink.
-4. Bij de bevestiging na aankoop (*Confirmation modal* / knop-link): zet de link naar `https://JOUW-SITE/thank-you.html`, zodat kopers ook de video zien.
-5. **Publish** → **Share** → kopieer de **checkout link** (`https://…lemonsqueezy.com/buy/…`).
+De sleutel staat **alleen** in de instellingen van de Payment Link (Stripe → Payment Links → *After payment*), niet in de code van de site en niet in git. Wie de sleutel niet heeft, ziet geen downloadknop. Het is geen waterdichte beveiliging: een koper kan de link doorsturen. Voor een PDF van €8.99 is dat oké.
 
-### 3. Product: het gratis hoofdstuk (€0)
-1. **New product** → naam `Free chapter: The Sleep Protocol`, prijs **€0** (of *pay what you want* met minimum 0).
-2. Upload `Free_Sleep_Chapter.pdf`.
-3. Zet bij de checkout de optie aan om **toestemming voor e-mails** te vragen (marketing consent). Zo bouw je een e-maillijst op.
-4. **Publish** → kopieer ook deze checkout link.
+### Zelf aanpassen in Stripe
+- **Settings → Business → Public details**: zet de naam die kopers zien op `Hormonal Optimization`.
+- **Settings → Customer emails**: zet *Successful payments* aan, dan krijgen kopers een bonnetje.
+- Btw: Stripe regelt de btw niet voor je. Vraag bij weinig verkoop na of je ouder de vrijstellingsregeling voor kleine ondernemingen kan gebruiken.
 
-### 4. `assets/js/config.js` invullen
-```js
-checkoutUrl: "https://jouwwinkel.lemonsqueezy.com/buy/....",     // de cursus
-freeChapterUrl: "https://jouwwinkel.lemonsqueezy.com/buy/....",  // het gratis hoofdstuk
-price: "€8.99",
-contactEmail: "jouw@email.com",
-delivery: "platform",
-testMode: false,      // ← pas op false zetten als alles werkt
-```
-
-### 5. Testen
-Lemon Squeezy heeft een **Test mode** (schakelaar linksonder in het dashboard). Doe daarmee een proefaankoop met kaart `4242 4242 4242 4242`, zie dat de mail met de PDF aankomt, en zet test mode daarna uit.
-
-### 6. Online zetten
-Sleep de map naar [app.netlify.com/drop](https://app.netlify.com/drop) en kies als sitenaam **hormonal-optimization** (de QR-code in de PDF wijst naar `hormonal-optimization.netlify.app/video.html`).
-Zet de **betaalde** PDF niet op de site als `testMode` uit staat: Lemon Squeezy levert hem.
-
-### Extra: partners (affiliates)
-In Lemon Squeezy kun je een **affiliate-programma** aanzetten. TikTokkers en sporters die je cursus promoten, krijgen dan bijvoorbeeld 30–40% per verkoop via hun eigen link.
+### Online zetten
+Sleep de map naar [app.netlify.com/drop](https://app.netlify.com/drop) en kies als sitenaam **hormonal-optimization**. De Payment Link en de QR-code in de PDF wijzen naar `hormonal-optimization.netlify.app`.
+De betaalde PDF hoort in `downloads/` met de naam `hormonal-optimization-<sleutel>.pdf`. Hij staat **niet** in git.
 
 ## Juridische pagina's
-`terms.html`, `privacy.html` en `refund.html` zijn **templates**. Vul de gemarkeerde velden in met de gegevens van je ouder (naam, adres, eventueel ondernemingsnummer, land) en laat ze nakijken. Lemon Squeezy is de *Merchant of Record*: zij verkopen de cursus formeel door en regelen btw en facturen.
+`terms.html`, `privacy.html` en `refund.html` zijn **templates**. Vul de gemarkeerde velden in met de gegevens van je ouder (naam, adres, eventueel ondernemingsnummer, land) en laat ze nakijken. Met Stripe is je ouder zelf de verkoper.
 
 ## Lokaal bekijken
 ```bash

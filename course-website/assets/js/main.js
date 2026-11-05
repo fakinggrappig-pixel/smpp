@@ -9,7 +9,7 @@
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
-  /* Config: price, e-mail, Stripe link */
+  /* Config: price, e-mail, checkout link */
   const free = cfg.testMode === true;
   const price = cfg.price || "€8.99";
   $$("[data-price]").forEach((el) => (el.textContent = price));
@@ -21,7 +21,7 @@
      the checkout and go straight to the download page. */
   if (free) $$("[data-buy]").forEach((el) => (el.href = "thank-you.html"));
 
-  /* Free sleep chapter: Lemon Squeezy €0 product (collects e-mail), or the PDF itself */
+  /* Free sleep chapter: an external sign-up link if set, otherwise the PDF itself */
   const ready = (u) => /^https:\/\//.test(u || "") && !/REPLACE/i.test(u);
   $$("[data-free]").forEach((el) => {
     if (ready(cfg.freeChapterUrl)) { el.href = cfg.freeChapterUrl; el.rel = "noopener"; }

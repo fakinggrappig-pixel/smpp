@@ -29,12 +29,12 @@
       <span class="eyebrow" id="status">Payment successful</span>
       <h1>You're in.</h1>
       <p class="lead" id="msgSite">Thanks for your order. Download your course and save it somewhere safe.</p>
-      <p class="lead" id="msgPlatform" hidden>Thanks for your order. Your download link is in the email from Lemon Squeezy (check your spam folder too). Save the PDF somewhere safe.</p>
+      <p class="lead" id="msgNoKey" hidden>Bought the course? Your download button is on the page you landed on right after paying. Lost it? Email us with the address you paid with and we'll send you the PDF.</p>
       <a href="#" id="downloadBtn" class="btn btn-primary btn-lg" target="_blank" rel="noopener">
         Download the course (PDF)
         <svg class="btn-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
-      <p id="dlNote" class="lead" style="font-size:15px;color:var(--gold-2);margin-top:18px" hidden>The download link isn't set yet. Add the PDF path to downloadUrl in assets/js/config.js.</p>
+      <p id="dlNote" class="lead" style="font-size:15px;color:var(--gold-2);margin-top:18px" hidden>Test mode: add the PDF path to downloadUrl in assets/js/config.js.</p>
       <p class="lead" style="font-size:15px;color:var(--muted);margin-top:18px">Problem with the download? Email <a href="#" data-email style="color:var(--accent)">support@example.com</a>.</p>
 
       <div class="player"><video controls playsinline preload="metadata" poster="assets/video/poster.jpg" src="assets/video/overview.mp4"></video></div>
@@ -53,26 +53,32 @@
     (function () {
       var cfg = window.SITE_CONFIG || {};
       var btn = document.getElementById("downloadBtn");
-      if (cfg.testMode === true) document.getElementById("status").textContent = "Test order: no payment taken";
-      // Real orders with platform delivery: the PDF comes by e-mail, so no public download link here.
-      if (cfg.testMode !== true && cfg.delivery === "platform") {
-        btn.hidden = true;
-        document.getElementById("msgSite").hidden = true;
-        document.getElementById("msgPlatform").hidden = false;
-      } else if (cfg.downloadUrl && !/REPLACE/i.test(cfg.downloadUrl)) {
-        btn.href = cfg.downloadUrl;
+      var $ = function (id) { return document.getElementById(id); };
+      // Paid orders: Stripe redirects here with ?k=<key>; the PDF is downloads/hormonal-optimization-<key>.pdf.
+      var k = new URLSearchParams(location.search).get("k") || "";
+      var url = "";
+      if (cfg.testMode === true) { $("status").textContent = "Test order: no payment taken"; url = cfg.downloadUrl || ""; }
+      else if (/^[a-f0-9]{16,64}$/.test(k)) url = "downloads/hormonal-optimization-" + k + ".pdf";
+      var paid = !!url;
+      if (url) {
+        btn.href = url;
+        btn.removeAttribute("target");
+        btn.setAttribute("download", "Hormonal_Optimization_Course.pdf");
+      } else if (cfg.testMode === true) {
+        btn.addEventListener("click", function (e) { e.preventDefault(); $("dlNote").hidden = false; });
       } else {
-        btn.addEventListener("click", function (e) {
-          e.preventDefault();
-          document.getElementById("dlNote").hidden = false;
-        });
+        btn.hidden = true;
+        $("msgSite").hidden = true;
+        $("msgNoKey").hidden = false;
+        $("status").textContent = "Download page";
+        document.querySelector(".thanks h1").textContent = "Your course";
       }
       if (cfg.contactEmail) {
         document.querySelectorAll("[data-email]").forEach(function (a) { a.href = "mailto:" + cfg.contactEmail; a.textContent = cfg.contactEmail; });
       }
 
       // Gold particle burst
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      if (!paid || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
       var c = document.getElementById("burst"), ctx = c.getContext("2d");
       var dpr = Math.min(2, window.devicePixelRatio || 1), w, h, parts = [];
       var cols = ["214,178,94", "243,220,155", "74,163,232", "55,196,124", "240,138,60", "168,115,240"];

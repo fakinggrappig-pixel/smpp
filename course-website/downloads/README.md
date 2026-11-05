@@ -1,9 +1,9 @@
-# Put the course PDF here (on your host only)
+# PDFs for the website (on your host only)
 
-Do **not** commit the PDF to a public Git repository, or anyone can download it for free.
+Do **not** commit the paid PDF to a public Git repository, or anyone can download it for free.
 
-1. Rename the PDF to something hard to guess, e.g. `hormonal-optimization-7f3k9q2x.pdf`.
-2. Upload it to this `downloads/` folder on your hosting (Netlify / Vercel / your server).
-3. Put the same path in `assets/js/config.js` → `downloadUrl`.
+- `free-sleep-chapter.pdf`: the free chapter, linked from the home page.
+- `hormonal-optimization-<key>.pdf`: the paid course. `<key>` is the same key as in the
+  Stripe Payment Link redirect (`thank-you.html?k=<key>`). It is only stored in Stripe.
 
 PDFs in this folder are ignored by Git (see `.gitignore`).
